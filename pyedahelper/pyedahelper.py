@@ -42,4 +42,21 @@ def fast_corr(df, col_name):
     df - (dataframe) the input data frame
     col_name - (list) the names of the columns selected for correlation analysis
     """
+    
+def fast_missing_impute(df, method, cols):
+    """
+    The function takes in a dataframe, a method of imputation, and a list of column names to modify. 
+    The choices of imputation are either remove (removes all rows with missing data), mean, 
+    median, mode, or multiple imputation. 
+    The function includes error handling to stop plots from being created for inappropriate 
+    column types, such as a categorical column being used with the "mean" method. 
+    
+    Arguments:
+    df - (pandas dataframe) the dataframe of interest
+    method - (str) the method of imputation from: {remove, mean, median, mode, multiple}
+    cols - (lst) the names of columns with missing data to be modified
+
+    Returns: 
+    df - the missing data is imputed into the original dataframe  
+    """
     pass
