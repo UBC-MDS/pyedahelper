@@ -31,3 +31,15 @@ def fast_plot(df, x, y, plot_type):
     """
     
     pass
+
+
+def fast_corr(df, col_name):
+    """
+    The function takes in a dataframe/tibble and a vector of column names and
+    creates correlation matrix.The correlation matrix can only include numeric columns.
+
+    Arguments:
+    df - (dataframe) the input data frame
+    col_name - (list) the names of the columns selected for correlation analysis
+    """
+    pass
