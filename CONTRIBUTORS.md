@@ -3,8 +3,9 @@
 
 ## Development Lead
 
-* Ofer Mansour <mansour.ofer@gmail.com>
+* Ofer Mansour 
+* Manuel Maldonado 
+* Subing Cao 
+* Suvarna Moharir 
 
-## Contributors
 
-None yet. Why not be the first?
