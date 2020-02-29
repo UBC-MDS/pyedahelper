@@ -10,7 +10,7 @@ A Python package that simplifies up the main EDA procedures such as: outlier ide
 ### Project Overview
 
 We are aware that data understanding and cleaning represents 60% of data scientist's time in any given project. 
-Our goal with this package is to simplify this process , and make a more efficient use of time while working on some of the main procedures done in EDA (outlier identification, data visualization, correlation, missing data imputation).
+Our goal with this package is to simplify this process , and make a more efficient use of time while working on some of the main procedures done in EDA (outlier identification, data visualization, correlation, missing data imputation).  
 
 
 ### Installation:
@@ -56,10 +56,10 @@ In the following table we have summarized existing packages that are related to 
 
 **How will our package compare to the previous existing packages/functions?**
 
-+ The fast_plot function leverages the Altair library in Python, however it improves on it by giving the user the ease to change plot type by changing an argument, and including error handling to ensure appropriate column types for certain plots.
-+ The "seaborn" Python package has similar functions in creating the correlation matrix. However, our function for correlation analysis provides a more user-friendly (less coding) experience and makes it easier to select the columns (features) for the analysis. It will filter out of the categorical columns and only perform the analysis on the numeric columns.
-+ The Python packages "sklearn.impute" and "autoimpute" have a similar function to imputing missing data. However, our function is likely more convenient for the user as it involves less coding, requiring the user to simply select the method of imputation and the columns with missing data.
-+ In relation to outlier identification our package will create an integral solution by mixing current existing methods into a single function. It will automatize the usage of Z-score and Interquantile methods to identify outliers.
+The pyedahelper package aims to provide an user friendly experience by reducing the code needed to conduct an exploratory data analysis, specifically for identifying outliers, imputing missing data, and generating visualizations for relations and correlations
+
+The fast_plot function leverages the Altair library in Python, however it improves on it by giving the user the ease to change plot type by changing an argument, and including error handling to ensure appropriate column types for certain plots. Also the "seaborn" Python package has similar functions in creating the correlation matrix. However, our function for correlation analysis provides a more user-friendly (less coding) experience and makes it easier to select the columns (features) for the analysis. It will filter out of the categorical columns and only perform the analysis on the numeric columns.
+On the other hand the Python packages "sklearn.impute" and "autoimpute" have a similar function to imputing missing data. However, our function is likely more convenient for the user as it involves less coding, requiring the user to simply select the method of imputation and the columns with missing data. Finally, in relation to outlier identification our package will create an integral solution by mixing current existing methods into a single function. It will automatize the usage of Z-score and Interquantile methods to identify outliers.
 
 
 
