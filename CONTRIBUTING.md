@@ -11,7 +11,7 @@ You can contribute in many ways:
 
 ### Report Bugs
 
-Report bugs at https://github.com/ofer-m/pyedahelper/issues.
+Report bugs at https://github.com/UBC-MDS/pyedahelper/issues.
 
 If you are reporting a bug, please include:
 
@@ -37,7 +37,7 @@ articles, and such.
 
 ### Submit Feedback
 
-The best way to send feedback is to file an issue at https://github.com/ofer-m/pyedahelper/issues.
+The best way to send feedback is to file an issue at https://github.com/UBC-MDS/pyedahelper/issues.
 
 If you are proposing a feature:
 
@@ -97,7 +97,7 @@ Before you submit a pull request, check that it meets these guidelines:
 2. If the pull request adds functionality, the docs should be updated. Put
    your new functionality into a function with a docstring, and add the
    feature to the list in README.md.
-3. The pull request should work for Python 3.7 & 3.8. Check https://github.com/ofer-m/pyedahelper/pulls and make sure that the tests pass for all supported Python versions.
+3. The pull request should work for Python 3.7 & 3.8. Check https://github.com/UBC-MDS/pyedahelper/pulls and make sure that the tests pass for all supported Python versions.
 
 ## Tips
 
