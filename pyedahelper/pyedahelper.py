@@ -1,3 +1,12 @@
+import numpy as np
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+from scipy import stats
+from statistics import mode
+import altair as alt
+
+
 def fast_outlier_id(data, columns, method):
     """
     The function takes in a dataframe and analyzes the values of a given column list, and 
