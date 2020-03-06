@@ -137,3 +137,7 @@ dmypy.json
 **.Rproj.user*
 **.Rproj
 **.Rhistory
+
+
+#Irrelevant Files
+readme.html
