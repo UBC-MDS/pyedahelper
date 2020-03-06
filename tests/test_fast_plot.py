@@ -20,7 +20,7 @@ def test_inputs():
         fast_plot(df = [1,2], x = "col_date", y = "col_int", plot_type = "line")
     
     # x input isn't string
-    with pytest.raises(AssertionError):
+    with pytest.raises(AssertionError, match = "x column name must be a string!"):
         fast_plot(df = df, x = ["col_date"], y = "col_int", plot_type = "line")
     
     # y input is not a column in data frame
