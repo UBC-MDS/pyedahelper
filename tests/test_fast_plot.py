@@ -28,7 +28,7 @@ def test_inputs():
         fast_plot(df = df, x = "col_date", y = "slkfjas", plot_type = "line")
     
     # plot type not bar/line/scatter
-    with pytest.raises(AssertionError):
+    with pytest.raises(AssertionError, match = 'plot_type must be either: "scatter", "line",  or "bar"'):
         fast_plot(df = df, x = "col_date", y = "col_int", plot_type = "slfjalskf")
     # x column should not be all null
     with pytest.raises(AssertionError):
