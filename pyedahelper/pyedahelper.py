@@ -8,7 +8,7 @@ def fast_outlier_id(data,cols="All",method = "z-score",threshold_low_freq = 0.05
 
     Arguments:
     data (dataframe) -  Dataframe to be analyzed.
-    cols (list) -  List containing the columns to be analyzed with the Z-score algorithm.
+    cols (list) -  List containing the columns to be analyzed with the Z-score or interquantile range algorithm
     method (string) - string indicating which method to be used to identify outliers (methods available are: "Z-score" or "Interquantile")
     threshold_low_freq (float) - threshold indicating value at which a frequency is considered to be an outlier for categorical values.
 
