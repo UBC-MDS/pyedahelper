@@ -16,7 +16,7 @@ def test_inputs():
     Function tests inputs for fast_plot function.
     """
     # data input isn't data frame
-    with pytest.raises(AssertionError):
+    with pytest.raises(AssertionError, match = "Data must be in pandas Data Frame!"):
         fast_plot(df = [1,2], x = "col_date", y = "col_int", plot_type = "line")
     
     # x input isn't string
