@@ -24,7 +24,7 @@ def fast_corr(df, col_name):
     if len(col_name) < 2:
         raise ValueError("At least two columns must be selected for correlation analysis.")
     
-    if all(isinstance(item, str) for item in col_name)==True and all(elem in iris.columns.to_list() for elem in col_name)==False:
+    if all(isinstance(item, str) for item in col_name)==True and all(elem in df.columns.to_list() for elem in col_name)==False:
         raise ValueError("The column names were not found.")
     
     if all(isinstance(item, int) for item in col_name)==True and max(col_name) > (df.shape[1]-1):
