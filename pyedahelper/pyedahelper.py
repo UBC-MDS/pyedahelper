@@ -85,7 +85,7 @@ def fast_missing_impute(df, method, cols):
     
     assert isinstance(method, str), "Method must be a string!" #Will also check for only one method
     
-    assert type(cols) == list or type(cols) == str, "Cols must be a list or a string!"
+    assert type(cols) == list, "Cols must be a list!"
     
     assert method in ["remove", "mean", "median", "mode"], "Not a valid method!"
     
