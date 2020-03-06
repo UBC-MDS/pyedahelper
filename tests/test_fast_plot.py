@@ -24,7 +24,7 @@ def test_inputs():
         fast_plot(df = df, x = ["col_date"], y = "col_int", plot_type = "line")
     
     # y input is not a column in data frame
-    with pytest.raises(AssertionError):
+    with pytest.raises(AssertionError, match = "y column name is not a column in data frame entered!"):
         fast_plot(df = df, x = "col_date", y = "slkfjas", plot_type = "line")
     
     # plot type not bar/line/scatter
