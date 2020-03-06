@@ -1,4 +1,7 @@
 import pytest
+import pandas as pd
+from pyedahelper import pyedahelper
+from statistics import mode
 
 ##helper data
 my_data = {"a":[3, 2, 3, 4, 5, float('nan')], 
@@ -16,7 +19,7 @@ def test_df_assert():
     Tests if the function correctly throws an error if df is not a dataframe
     """
     with pytest.raises(AssertionError, match = "Data must be a data frame!"):
-        fast_missing_impute(df = test_list, method = "mean", cols = "a")
+        pyedahelper.fast_missing_impute(df = test_list, method = "mean", cols = "a")
 
 def test_method_str():
     """
@@ -24,7 +27,7 @@ def test_method_str():
     when one method is inputted
     """
     with pytest.raises(AssertionError, match = "Method must be a string!"):
-        fast_missing_impute(df = test_data, method = ["mean"], cols = "a")
+        pyedahelper.fast_missing_impute(df = test_data, method = ["mean"], cols = "a")
 
 def test_one_method():
     """
@@ -32,28 +35,28 @@ def test_one_method():
     when more than one method is inputted
     """
     with pytest.raises(AssertionError, match = "Method must be a string!"):
-        fast_missing_impute(df = test_data, method = ["mean", "median"], cols = "a")
+        pyedahelper.fast_missing_impute(df = test_data, method = ["mean", "median"], cols = "a")
 
 def test_cols_int():
     """
     Tests if the function correctly throws an error if cols is an integer
     """
     with pytest.raises(AssertionError, match = "Cols must be a list!"):
-        fast_missing_impute(df = test_data, method = "mean", cols = 7)
+        pyedahelper.fast_missing_impute(df = test_data, method = "mean", cols = 7)
 
 def test_cols_set():
     """
     Tests if the function correctly throws an error if cols is a set
     """
     with pytest.raises(AssertionError, match = "Cols must be a list!"):
-        fast_missing_impute(df = test_data, method = "mean", cols = {'R', 'Python'})
+        pyedahelper.fast_missing_impute(df = test_data, method = "mean", cols = {'R', 'Python'})
 
 def test_method_format():
     """
     Tests if the function correctly throws an error if method is not a valid method
     """
     with pytest.raises(AssertionError, match = "Not a valid method!"):
-        fast_missing_impute(df = test_data, method = "avg", cols = ["a", "b"])
+        pyedahelper.fast_missing_impute(df = test_data, method = "avg", cols = ["a", "b"])
 
 def test_mode_fail():
     """
@@ -61,7 +64,7 @@ def test_mode_fail():
     and one or more of the columns don't have a mode
     """
     with pytest.raises(Exception):
-        fast_missing_impute(df = test_data, method = "mode", cols = ["c"])
+        pyedahelper.fast_missing_impute(df = test_data, method = "mode", cols = ["c"])
 
 def test_cols_allstr():
     """
@@ -69,7 +72,7 @@ def test_cols_allstr():
     contains a non-string element
     """
     with pytest.raises(AssertionError, match = "Columns must be a list of strings"):
-        fast_missing_impute(df = test_data, method = "median", cols = ["a", 3, "c"])
+        pyedahelper.fast_missing_impute(df = test_data, method = "median", cols = ["a", 3, "c"])
 
 def test_cols_in_df():
     """
@@ -77,7 +80,7 @@ def test_cols_in_df():
     is not part of the data frame
     """
     with pytest.raises(AssertionError, match = "One or more of the column names are not in the data frame!"):
-        fast_missing_impute(df = test_data, method = "mean", cols = ["a","c", "fake_col"])
+        pyedahelper.fast_missing_impute(df = test_data, method = "mean", cols = ["a","c", "fake_col"])
 
 def test_non_numeric():
     """
@@ -85,14 +88,14 @@ def test_non_numeric():
     and the method selected is not 'remove' or 'mode'
     """
     with pytest.raises(AssertionError, match = "With non-numeric columns, can only use method = 'remove' or 'mode'"):
-        fast_missing_impute(df = test_data, method = "mean", cols = "e")
+        pyedahelper.fast_missing_impute(df = test_data, method = "mean", cols = ["e"])
 
 def test_remove_method():
     """
     Tests if the function, when method = 'remove', leaves the selected column(s) with no NAs and
     leaves the other columns the same
     """
-    sample_drop = fast_missing_impute(df = test_data, method = "remove", cols = ["a", "e"])
+    sample_drop = pyedahelper.fast_missing_impute(df = test_data, method = "remove", cols = ["a", "e"])
     assert sample_drop["a"].isna().sum() == 0
     assert sample_drop["e"].isna().sum() == 0
     assert sample_drop["f"].isna().sum() == 4
@@ -104,7 +107,7 @@ def test_mean():
     Tests if the function, when method = 'mean', leaves the selected columns with NAs imputed with 
     the mean of the column, with no NAs left in the column, and leaves the other columns the same
     """
-    sample_mean = fast_missing_impute(df = test_data, method = "mean", cols = ["a", "c"])
+    sample_mean = pyedahelper.fast_missing_impute(df = test_data, method = "mean", cols = ["a", "c"])
     assert sample_mean["a"].isna().sum() == 0
     assert sample_mean["c"].isna().sum() == 0
     assert sample_mean["b"].isna().sum() == test_data["b"].isna().sum() #should remain unchanged
@@ -117,7 +120,7 @@ def test_median():
     Tests if the function, when method = 'median', leaves the selected columns with NAs imputed with 
     the median of the column, with no NAs left in the column, and leaves the other columns the same   
     """
-    sample_median = fast_missing_impute(df = test_data, method = "median", cols = ["a", "d"])
+    sample_median = pyedahelper.fast_missing_impute(df = test_data, method = "median", cols = ["a", "d"])
     assert sample_median["a"].isna().sum() == 0
     assert sample_median["d"].isna().sum() == 0
     assert sample_median["b"].isna().sum() == test_data["b"].isna().sum() #should remain unchanged
@@ -130,7 +133,7 @@ def test_mode():
     Tests if the function, when method = 'mode', leaves the selected columns with NAs imputed with 
     the mode of the column, with no NAs left in the column, and leaves the other columns the same 
     """
-    sample_mode = fast_missing_impute(df = test_data, method = "mode", cols = ["a", "e"])
+    sample_mode = pyedahelper.fast_missing_impute(df = test_data, method = "mode", cols = ["a", "e"])
     assert sample_mode["a"].isna().sum() == 0
     assert sample_mode["e"].isna().sum() == 0 
     assert sample_mode["d"].isna().sum() == test_data["d"].isna().sum() #should remain unchanged
