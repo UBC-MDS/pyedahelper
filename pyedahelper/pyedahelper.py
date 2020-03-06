@@ -1,5 +1,6 @@
 
 def fast_outlier_id(data,cols="All",method = "z-score",threshold_low_freq = 0.05):
+
     """Documentatation for function: fast_outlier_identifier
 
     Analyzes the values of a given column list in a given dataframe, identifies outliers using either the Z-Score algorithm or interquantile range algorithm.
@@ -15,7 +16,6 @@ def fast_outlier_id(data,cols="All",method = "z-score",threshold_low_freq = 0.05
     Returns:
     dataframe: Results summary as a dataframe containing the following columns: column name, list containing the outlier's index position, percentaje of total counts considered outliers.
     """
-    
     if type(cols) == str:
         if cols.lower() == "all":
             cols = list(data.columns)
@@ -46,10 +46,10 @@ def fast_outlier_id(data,cols="All",method = "z-score",threshold_low_freq = 0.05
         ##More lists containing summary values
         no_nans = subset[i].isna().sum()
         no_nans_list.append(no_nans)
-        col_type_list.append(subset[i[0]].dtype)
-        perc_nans_list.append(round(no_nans/len(subset[i[0]]),2))
+        col_type_list.append(subset[i].dtype)
+        perc_nans_list.append(round(no_nans/len(subset[i]),2))
         data_no_nans = subset[i][~pd.isna(subset[i])]
-        if data_no_nans.dtypes in ['float64']:
+        if data_no_nans.dtypes in ['float64','int64']:
             if method.lower() == "z-score":
                 score = np.abs(stats.zscore(data_no_nans))
                 data_no_nans = data_no_nans.to_numpy()
@@ -70,9 +70,9 @@ def fast_outlier_id(data,cols="All",method = "z-score",threshold_low_freq = 0.05
                 method_list.append("Interquartile")
         elif data_no_nans.dtype in ['object']:
             score = data_no_nans.value_counts()/len(data_no_nans)
-            outlier_values = score[score< 0.05].index.tolist()
-            outlier_count_list.append(data_no_nans.value_counts()[score< 0.05].sum())
-            outlier_perc_list.append(round(sum(score[score< 0.05]),2))
+            outlier_values = score[score< threshold_low_freq].index.tolist()
+            outlier_count_list.append(data_no_nans.value_counts()[score< threshold_low_freq].sum())
+            outlier_perc_list.append(round(sum(score[score< threshold_low_freq]),2))
             outlier_values_list.append(outlier_values)
             method_list.append("low-freq")
     summary_dict = {'column_name':cols,'type':col_type_list,'no_nans':no_nans_list,'perc_nans':perc_nans_list,'outlier_method':method_list,"no_outliers":outlier_count_list,"perc_outliers":outlier_perc_list,"outlier_values":outlier_values_list}
