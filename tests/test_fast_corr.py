@@ -1,11 +1,12 @@
 import seaborn as sns
 import pandas as pd
 from pytest import raises
+from pyedahelper import pyedahelper
 iris = sns.load_dataset('iris')
 
 def test_input():
     """
-    This function tests whether the input for fast_corr is valid
+    This function tests whether the input for pyedahelper.fast_corr is valid
     """
     data = iris.to_numpy()
     col_name = ['sepal_length', 'sepal_width', 'petal_length', 'petal_width', 'species']
@@ -16,25 +17,25 @@ def test_input():
     col_name5 = [1,2,6]
     
     with raises(TypeError):
-            fast_corr(data, col_name)
+            pyedahelper.fast_corr(data, col_name)
     with raises(TypeError):
-            fast_corr(iris, col_name1)
+            pyedahelper.fast_corr(iris, col_name1)
     with raises(ValueError):
-            fast_corr(iris, col_name2)
+            pyedahelper.fast_corr(iris, col_name2)
     with raises(ValueError):
-            fast_corr(iris, col_name3)
+            pyedahelper.fast_corr(iris, col_name3)
     with raises(ValueError):
-            fast_corr(iris, col_name4)
+            pyedahelper.fast_corr(iris, col_name4)
     with raises(ValueError):
-            fast_corr(iris, col_name5)
+            pyedahelper.fast_corr(iris, col_name5)
 
 def test_remove_non_numberic():
     """
-    This function tests whether the fast_corr removes the non-numeric columns
+    This function tests whether the pyedahelper.fast_corr removes the non-numeric columns
     """
     data=iris
     col_name = ['sepal_length', 'sepal_width', 'petal_length', 'petal_width', 'species']
-    p=fast_corr(data,col_name)
+    p=pyedahelper.fast_corr(data,col_name)
     df=data.loc[:,col_name]
     assert str(p.get_xticklabels())[11:12]==str(df._get_numeric_data().shape[1])
             
@@ -45,7 +46,7 @@ def test_plot():
     """
     data=iris
     col_name = ['sepal_length', 'sepal_width', 'petal_length', 'petal_width', 'species']
-    p=fast_corr(data, col_name)
+    p=pyedahelper.fast_corr(data, col_name)
     assert str(type(p))=="<class 'matplotlib.axes._subplots.AxesSubplot'>"
     assert p.get_title()=='Correlation Matrix'
     assert str(p.get_yticklabels())== '<a list of 4 Text yticklabel objects>'
