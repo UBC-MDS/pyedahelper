@@ -7,7 +7,8 @@ from statistics import mode
 import altair as alt
 
 
-def fast_outlier_id(data, columns, method):
+def fast_outlier_id(data,cols="All",method = "z-score",threshold_low_freq = 0.05):
+
     """
     The function takes in a dataframe and analyzes the values of a given column list, and 
     identifies outliers using either the ZScore algorithm or interquantile range algorithm.
@@ -15,17 +16,82 @@ def fast_outlier_id(data, columns, method):
     containing the outlier's index position, percentage of total counts considered outliers.
 
     Arguments:
-    data (pandas dataframe) - dataframe to be analyzed.
-    columns (list) - the columns to be analyzed with the Z-score algorithm.
-    method (string) - which method to be used to identify outliers from: 
-    {"z-score algorithm", "interquartile range"} 
-    
+    data (dataframe) -  Dataframe to be analyzed.
+    cols (list) -  List containing the columns to be analyzed with the Z-score or interquantile range algorithm
+    method (string) - string indicating which method to be used to identify outliers (methods available are: "Z-score" or "Interquantile")
+    threshold_low_freq (float) - threshold indicating value at which a frequency is considered to be an outlier for categorical values.
+
+
     Returns:
     dataframe: Results summary as a dataframe containing the following columns: 
     column name, list containingthe outlier's index position, percentage of total counts 
     considered outliers.
     """
-    pass
+    
+    if type(cols) == str:
+        if cols.lower() == "all":
+            cols = list(data.columns)
+        
+    # ASSERT TESTS
+    assert isinstance(data, pd.DataFrame), "Data must be in pandas Data Frame!"
+    
+    if type(cols) != str:
+        assert isinstance(cols, list), "Columns must be inputted in a list"
+        for i in cols:
+            assert i in list(data.columns),"Columns must exist in the inputted data dataframe"
+        
+
+    assert method.lower() in ["z-score","interquantile"], "The only permitted values are z-score or interquantile,thank you"
+    
+    ##Initialize lists containing summary values
+    no_nans_list = list()
+    col_type_list = list()
+    perc_nans_list = list()
+    outlier_values_list = list()
+    outlier_count_list = list()
+    outlier_perc_list = list()
+    method_list = list()
+    
+    ##Subsetting the data by the columns selected by the user
+    subset = data[cols]
+    for i in cols:
+        ##More lists containing summary values
+        no_nans = subset[i].isna().sum()
+        no_nans_list.append(no_nans)
+        col_type_list.append(subset[i].dtype)
+        perc_nans_list.append(round(no_nans/len(subset[i]),2))
+        data_no_nans = subset[i][~pd.isna(subset[i])]
+        if data_no_nans.dtypes in ['float64','int64']:
+            if method.lower() == "z-score":
+                score = np.abs(stats.zscore(data_no_nans))
+                data_no_nans = data_no_nans.to_numpy()
+                outlier_values = data_no_nans[np.where(score>2)]
+                outlier_count_list.append(len(outlier_values))
+                outlier_perc_list.append(round(len(outlier_values)/len(data_no_nans),2))
+                outlier_values_list.append(outlier_values)
+                method_list.append("Z-Score")
+            elif method.lower() == "interquartile":
+                Q1 = np.quantile(data_no_nans,0.25)
+                Q3 = np.quantile(data_no_nans,0.75)
+                IQR = Q3 - Q1
+                score = (data_no_nans < (Q1 - 1.5 * IQR)) | (data_no_nans > (Q3 + 1.5 * IQR))
+                outlier_values = data_no_nans[np.where(score>0)]
+                outlier_count_list.append(len(outlier_value))
+                outlier_perc_list.append(round(len(outlier_value)/len(data_no_nans),2))
+                outlier_values_list.append(outlier_values)
+                method_list.append("Interquartile")
+        elif data_no_nans.dtype in ['object']:
+            score = data_no_nans.value_counts()/len(data_no_nans)
+            outlier_values = score[score< threshold_low_freq].index.tolist()
+            outlier_count_list.append(data_no_nans.value_counts()[score< threshold_low_freq].sum())
+            outlier_perc_list.append(round(sum(score[score< threshold_low_freq]),2))
+            outlier_values_list.append(outlier_values)
+            method_list.append("low-freq")
+    summary_dict = {'column_name':cols,'type':col_type_list,'no_nans':no_nans_list,'perc_nans':perc_nans_list,'outlier_method':method_list,"no_outliers":outlier_count_list,"perc_outliers":outlier_perc_list,"outlier_values":outlier_values_list}
+    summary = pd.DataFrame(summary_dict)
+    return(summary)
+
+  
 
 def fast_plot(df, x, y, plot_type):
     """
