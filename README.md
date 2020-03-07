@@ -16,7 +16,7 @@ Our goal with this package is to simplify this process , and make a more efficie
 ### Installation:
 
 ```
-Work in progress. 
+pip install -i https://test.pypi.org/simple/ pyedahelper
 ```
 
 ### Functions
