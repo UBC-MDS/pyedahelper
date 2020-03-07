@@ -49,8 +49,6 @@ def test_plot():
     p=pyedahelper.fast_corr(data, col_name)
     assert str(type(p))=="<class 'matplotlib.axes._subplots.AxesSubplot'>"
     assert p.get_title()=='Correlation Matrix'
-    assert str(p.get_yticklabels())== '<a list of 4 Text yticklabel objects>'
-    assert str(p.get_xticklabels())== '<a list of 4 Text xticklabel objects>'
     assert 'matplotlib.collections.QuadMes' in str(p.get_children()[0])
     assert 'Spine' in str(p.get_children()[1])
 
