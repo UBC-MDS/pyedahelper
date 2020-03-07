@@ -14,26 +14,39 @@ def fast_outlier_id(data,cols="All",method = "z-score",threshold_low_freq = 0.05
     identifies outliers using either the ZScore algorithm or interquantile range algorithm.
     The return is a dataframe containing the following columns: column name, list 
     containing the outlier's index position, percentage of total counts considered outliers.
-
-    Arguments:
-    data (dataframe) -  Dataframe to be analyzed.
-    cols (list) -  List containing the columns to be analyzed with the Z-score or interquantile range algorithm
-    method (string) - string indicating which method to be used to identify outliers (methods available are: "Z-score" or "Interquantile")
-    threshold_low_freq (float) - threshold indicating value at which a frequency is considered to be an outlier for categorical values.
-
-
-    Returns:
-    dataframe: Results summary as a dataframe containing the following columns: 
-    column name, list containingthe outlier's index position, percentage of total counts 
-    considered outliers.
+    Parameters
+    ----------
+    data: pandas.core.frame.DataFrame
+      The data that will be analyzed.
+    method: str
+      The method to be applied to the data in search for outliers.
+    cols: list
+      The column names to be analyzed.
+    threshold_low_freq: double
+      threshold indicating value at which a frequency is considered to be an outlier for categorical values. 
+    Returns
+    -------
+    dataframe
+        a dataframe containing a summary of outliers found.
+    Examples
+    ------------------------
+    >>> sample = {"col_a": [50, 50, 6, 8, float("nan")],
+                  "col_b": ["the", "quick", float("nan"), "quick", "fox"],
+                  "col_c": [67.56, float("nan"), 80, 34.39, 76]
+                }
+    >>> sample_data = pd.DataFrame(sample)
+    >>> fast_outlier_id(sample_data)
     """
+    
+    # ASSERT TESTS
+    assert isinstance(data, pd.DataFrame), "Data must be in pandas Data Frame!"
+    
     
     if type(cols) == str:
         if cols.lower() == "all":
             cols = list(data.columns)
         
-    # ASSERT TESTS
-    assert isinstance(data, pd.DataFrame), "Data must be in pandas Data Frame!"
+    
     
     if type(cols) != str:
         assert isinstance(cols, list), "Columns must be inputted in a list"
