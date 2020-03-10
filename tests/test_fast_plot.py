@@ -25,6 +25,14 @@ def test_inputs():
     with pytest.raises(AssertionError, match = "x column name must be a string!"):
         pyedahelper.fast_plot(df = df, x = ["col_date"], y = "col_int", plot_type = "line")
     
+    # y input isn't string
+    with pytest.raises(AssertionError, match = "y column name must be a string!"):
+        pyedahelper.fast_plot(df = df, x = "col_date", y = ["col_int"], plot_type = "line")
+    
+    # x input is not a column in data frame
+    with pytest.raises(AssertionError, match = "x column name is not a column in data frame entered!"):
+        pyedahelper.fast_plot(df = df, x = "asdfjsf", y = "col_int", plot_type = "line")
+    
     # y input is not a column in data frame
     with pytest.raises(AssertionError, match = "y column name is not a column in data frame entered!"):
         pyedahelper.fast_plot(df = df, x = "col_date", y = "slkfjas", plot_type = "line")
@@ -35,6 +43,10 @@ def test_inputs():
     # x column should not be all null
     with pytest.raises(AssertionError, match = "x Column must not be all Null!"):
         pyedahelper.fast_plot(df = df, x = "col_nan", y = "col_int", plot_type = "line")
+
+    # x column should not be all null
+    with pytest.raises(AssertionError, match = "y Column must not be all Null!"):
+        pyedahelper.fast_plot(df = df, x = "col_int", y = "col_nan", plot_type = "line")
 
 def test_scatter():
     """
@@ -49,7 +61,7 @@ def test_scatter():
     assert "col_flt" in a.encoding['y']['shorthand']
     
     # raise error if y is date
-    with pytest.raises(Exception):
+    with pytest.raises(Exception, match = "Y column cannot be a date type!"):
         pyedahelper.fast_plot(df = df, x = "col_int", y = "col_date", plot_type = "scatter")
         
 def test_line():
