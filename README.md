@@ -34,11 +34,74 @@ pip install -i https://test.pypi.org/simple/ pyedahelper
 |fast_corr| 2 parameters: dataframe, list of columns to be analyzed, |correlation plot object| Calculates the correlation of all specified columns and generates a plot visualizing the correlation coefficients.|
 |fast_missing_impute|3 parameters: dataframe, a string specifying the missing data treatment method,list of columns to be treated| new dataframe without missing values in the specified columns|Given a dataframe and a list of columns in that dataframe, missing values are identified and treated as specified in the missing data treatment method |
 
+### Usage
+
+The package can analyze the values of a given column list, and identify outliers using either the ZScore algorithm or interquantile range algorithm.
+
+```python
+from pyedahelper import pyedahelper
+
+sample = {"col_a": [500000000000, 50, 6, 8, float("nan"), 10, 5, 2, 3]}
+
+sample_data = pd.DataFrame(sample)
+pyedahelper.fast_outlier_id(sample_data, cols="All", method="z-score", threshold_low_freq=0.05)
+```
+**Output:**
+
+|    | column_name   | type    |   no_nans |   perc_nans | outlier_method   |   no_outliers |   perc_outliers |   outlier_values |
+|---:|:--------------|:--------|----------:|------------:|:-----------------|--------------:|----------------:|-----------------:|
+|  0 | col_a         | float64 |         1 |        0.11 | Z-Score          |             1 |            0.12 |             5000 |
+
+
+`pyedahelper` can also quickly create scatter, line or bar plots from a pandas data frame, using the Altair library. As an example, using the iris dataset:
+
+```python
+from pyedahelper import pyedahelper
+import seaborn as sns
+
+iris = sns.load_dataset('iris')
+pyedahelper.fast_plot(df=iris, x='sepal_length', y='sepal_width', plot_type='scatter')
+```
+**Output:**
+
+The package can also create correlation matrix easily, by inputting a pandas data frame and desired columns. As an example, using the iris dataset:
+
+```python
+from pyedahelper import pyedahelper
+import seaborn as sns
+
+iris = sns.load_dataset('iris')
+pyedahelper.fast_corr(df=iris, col_name=['sepal_length', 'sepal_width', 'petal_length'])
+```
+
+**Output:**
+
+Finally, `pyedahelper` can impute values to missing data, with method choices of either remove (removes all rows with missing data), mean, median, or mode imputation.
+
+```python
+from pyedahelper import pyedahelper
+
+sample = {"col_a": [50, 50, 6, 8, float("nan")],
+          "col_b": ["the", "quick", float("nan"), "quick", "fox"]
+           }
+sample_data = pd.DataFrame(sample)
+
+pyedahelper.fast_missing_impute(df=sample_data, method="mode", cols=["col_a", "col_b"])
+```
+
+**Output:**
+
+|    |   col_a | col_b   |
+|---:|--------:|:--------|
+|  0 |      50 | the     |
+|  1 |      50 | quick   |
+|  2 |       6 | quick   |
+|  3 |       8 | quick   |
+|  4 |      50 | fox     |
 
 
 
-
-## Alignment with Python / R Ecosystems
+### Alignment with Python / R Ecosystems
 
 At this time, there are multiple packages that are used during EDA with a similar functionality in both R and Python. Nevertheless most of these existing packages require multiple steps or provide results that could be simplified.
 
