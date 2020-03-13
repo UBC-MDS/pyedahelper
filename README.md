@@ -1,6 +1,6 @@
 ## pyedahelper 
 
-![](https://github.com/UBC-MDS/pyedahelper/workflows/build/badge.svg) [![codecov](https://codecov.io/gh/UBC-MDS/pyedahelper/branch/master/graph/badge.svg)](https://codecov.io/gh/UBC-MDS/pyedahelper) ![Release](https://github.com/UBC-MDSpyedahelper/workflows/Release/badge.svg)
+![](https://github.com/UBC-MDS/pyedahelper/workflows/build/badge.svg) [![codecov](https://codecov.io/gh/UBC-MDS/pyedahelper/branch/master/graph/badge.svg)](https://codecov.io/gh/UBC-MDS/pyedahelper) ![Release](https://github.com/UBC-MDS/pyedahelper/workflows/Release/badge.svg)
 
 [![Documentation Status](https://readthedocs.org/projects/pyedahelper/badge/?version=latest)](https://pyedahelper.readthedocs.io/en/latest/?badge=latest)
 
