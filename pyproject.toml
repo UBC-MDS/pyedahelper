@@ -22,7 +22,7 @@ pytest-cov = "^2.8.1"
 flake8 = "^3.7.9"
 
 [tool.semantic_release]
-version_variable = "convertempPy/__init__.py:__version__"
+version_variable = "PYEDAHELPER/__init__.py:__version__"
 version_source = "commit"
 upload_to_pypi = "false"
 patch_without_tag = "true"
