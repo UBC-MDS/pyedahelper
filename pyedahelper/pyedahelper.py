@@ -205,7 +205,7 @@ def fast_plot(df, x, y, plot_type):
             raise Exception("Y column cannot be a date type!")
 
         if y_type not in ["float64", "int64"]:
-            if x_type == y_type:
+            if x_type not in ["float64", "int64"]:
                 x_arg = x
                 y_arg = y
         else:
