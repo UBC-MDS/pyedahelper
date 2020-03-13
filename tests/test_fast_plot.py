@@ -100,6 +100,15 @@ def test_line():
     assert "col_int" in a.encoding['x']['shorthand']
     assert "col_flt" in a.encoding['y']['shorthand']
 
+    b = pyedahelper.fast_plot(df=df, x="col_date", y="col_chr",
+                              plot_type="line")
+
+    assert b.height == 600
+    assert b.width == 900
+    assert b.mark == "line"
+    assert "col_date" in b.encoding['x']['shorthand']
+    assert "col_chr" in b.encoding['y']['shorthand']
+
     # raise error if y is date
     with pytest.raises(Exception):
         pyedahelper.fast_plot(df=df, x="col_int", y="col_date",
@@ -117,6 +126,26 @@ def test_bar():
     assert a.mark == "bar"
     assert "col_int" in a.encoding['x']['shorthand']
     assert "col_flt" in a.encoding['y']['shorthand']
+
+    b = pyedahelper.fast_plot(df = df, x = "col_int", y = "col_date", plot_type = "bar")
+
+    assert b.height == 600
+    assert b.width == 900
+    assert b.mark == "bar"
+    assert "col_int" in b.encoding['x']['shorthand']
+    assert "col_date" in b.encoding['y']['shorthand']
+    assert ":O" in b.encoding['y']['shorthand']
+    assert "sum" in b.encoding['x']['shorthand']
+
+    c = pyedahelper.fast_plot(df = df, x = "col_int", y = "col_chr", plot_type = "bar")
+
+    assert c.height == 600
+    assert c.width == 900
+    assert c.mark == "bar"
+    assert "col_int" in c.encoding['x']['shorthand']
+    assert "col_chr" in c.encoding['y']['shorthand']
+    assert "sum" in c.encoding['x']['shorthand']
+
 
     # ensure Exception gets raised when both columns are non-numeric
     with pytest.raises(Exception):
