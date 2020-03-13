@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pyedahelper"
-version = "0.1.0"
+version = "0.1.1"
 description = "Python package that simplifies EDA."
 authors = ["Ofer Mansour <mansour.ofer@gmail.com>"]
 license = "MIT"
