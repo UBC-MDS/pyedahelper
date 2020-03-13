@@ -56,7 +56,7 @@ def fast_outlier_id(data, cols="All", method="z-score",
                                "dataframe"
 
     assert method.lower() in ["z-score",
-                              "interquantile"], \
+                              "interquartile"], \
         "The only permitted values are z-score or interquantile,thank you"
 
     # Initialize lists containing summary values
