@@ -64,6 +64,8 @@ pyedahelper.fast_plot(df=iris, x='sepal_length', y='sepal_width', plot_type='sca
 ```
 **Output:**
 
+![](https://github.com/UBC-MDS/pyedahelper/blob/master/img/fast_plot_output.png)
+
 The package can also create correlation matrix easily, by inputting a pandas data frame and desired columns. As an example, using the iris dataset:
 
 ```python
@@ -75,6 +77,8 @@ pyedahelper.fast_corr(df=iris, col_name=['sepal_length', 'sepal_width', 'petal_l
 ```
 
 **Output:**
+
+![](https://github.com/UBC-MDS/pyedahelper/blob/master/img/fast_corr_output.png)
 
 Finally, `pyedahelper` can impute values to missing data, with method choices of either remove (removes all rows with missing data), mean, median, or mode imputation.
 
