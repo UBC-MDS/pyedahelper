@@ -82,10 +82,9 @@ jobs:
         prerelease: false
     - name: Build and publish
       env:
-        TEST_PYPI_USERNAME: __token__
-        TEST_PYPI_PASSWORD: ${{ secrets.TEST_PYPI_TOKEN }}
+        TEST_PYPI_USERNAME: ${{ secrets.TEST_PYPI_USERNAME }}
+        TEST_PYPI_PASSWORD: ${{ secrets.TEST_PYPI_PASSWORD }}
       run: |
-  
         poetry config repositories.test-pypi https://test.pypi.org/legacy/
         poetry build
         poetry publish -r test-pypi -u $TEST_PYPI_USERNAME -p $TEST_PYPI_PASSWORD
