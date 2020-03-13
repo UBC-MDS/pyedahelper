@@ -70,14 +70,14 @@ def test_method_format():
                                         cols=["a", "b"])
 
 
-def test_mode_fail():
-    """
-    Tests if the function correctly throws an error if method is mode
-    and one or more of the columns don't have a mode
-    """
-    with pytest.raises(Exception):
-        pyedahelper.fast_missing_impute(df=test_data, method="mode",
-                                        cols=["c"])
+#def test_mode_fail():
+#    """
+#    Tests if the function correctly throws an error if method is mode
+#    and one or more of the columns don't have a mode
+#    """
+#    with pytest.raises(Exception):
+#        pyedahelper.fast_missing_impute(df=test_data, method="mode",
+#                                        cols=["c"])
 
 
 def test_cols_allstr():
