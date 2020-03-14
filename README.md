@@ -36,7 +36,7 @@ pip install -i https://test.pypi.org/simple/ pyedahelper
 
 ### Usage
 
-The package can analyze the values of a given column list, and identify outliers using either the ZScore algorithm or interquantile range algorithm. You can find more references regarding these algorithms here: [Z-score](https://en.wikipedia.org/wiki/Standard_score) and Interquartile(https://en.wikipedia.org/wiki/Interquartile_range).
+The package can analyze the values of a given column list, and identify outliers using either the ZScore algorithm or interquantile range algorithm. You can find more references regarding these algorithms here: [Z-score](https://en.wikipedia.org/wiki/Standard_score) and [Interquartile](https://en.wikipedia.org/wiki/Interquartile_range).
 
 ```python
 from pyedahelper import pyedahelper
