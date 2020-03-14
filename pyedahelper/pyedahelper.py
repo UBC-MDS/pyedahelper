@@ -93,7 +93,7 @@ def fast_outlier_id(data, cols="All", method="z-score",
                 IQR = Q3 - Q1
                 score = (data_no_nans < (Q1 - 1.5 * IQR)) | (
                             data_no_nans > (Q3 + 1.5 * IQR))
-                data_no_nans = data_no_nans.to_numpy()            
+                data_no_nans = data_no_nans.to_numpy()
                 outlier_values = data_no_nans[np.where(score > 0)]
                 outlier_count_list.append(len(outlier_values))
                 outlier_perc_list.append(
