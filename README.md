@@ -41,7 +41,7 @@ The package can analyze the values of a given column list, and identify outliers
 ```python
 from pyedahelper import pyedahelper
 
-sample = {"col_a": [500000000000, 50, 6, 8, float("nan"), 10, 5, 2, 3]}
+sample = {"col_a": [5000, 50, 6, 8, float("nan"), 10, 5, 2, 3]}
 
 sample_data = pd.DataFrame(sample)
 pyedahelper.fast_outlier_id(sample_data, cols="All", method="z-score", threshold_low_freq=0.05)
