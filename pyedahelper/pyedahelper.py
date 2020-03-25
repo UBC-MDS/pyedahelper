@@ -368,8 +368,8 @@ def fast_missing_impute(df, method, cols):
 
     assert method in ["remove", "mean", "median",
                       "mode"], "Not a valid method, " \
-                                "can only use " \
-                                "method = remove, mean, median, or mode!"
+                               "can only use " \
+                               "method = remove, mean, median, or mode!"
 
     for col in cols:
         assert isinstance(col, str), "Columns must be a list of strings"
