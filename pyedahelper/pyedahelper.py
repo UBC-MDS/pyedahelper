@@ -25,14 +25,14 @@ def fast_outlier_id(data, cols="All", method="z-score",
     cols: list
       The column names to be analyzed.
     threshold_low_freq: flt
-      The threshold indicating value at which a frequency is considered to be an
+      Threshold indicating value at which a frequency is considered to be an
       outlier for categorical values.
-    
+
     Returns
     -------
     dataframe
         A dataframe containing a summary of outliers found.
-    
+
     Examples
     ------------------------
     >>> sample = {"col_a": [50, 50, 6, 8, float("nan")],
@@ -41,7 +41,7 @@ def fast_outlier_id(data, cols="All", method="z-score",
     >>>            }
     >>> sample_data = pd.DataFrame(sample)
     >>> fast_outlier_id(sample_data)
-
+    
     """
 
     # ASSERT TESTS
