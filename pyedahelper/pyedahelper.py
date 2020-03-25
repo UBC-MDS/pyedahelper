@@ -41,7 +41,7 @@ def fast_outlier_id(data, cols="All", method="z-score",
     >>>            }
     >>> sample_data = pd.DataFrame(sample)
     >>> fast_outlier_id(sample_data)
-    
+
     """
 
     # ASSERT TESTS
