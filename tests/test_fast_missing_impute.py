@@ -65,7 +65,10 @@ def test_method_format():
     Tests if the function correctly throws an error if method is not a valid
     method
     """
-    with pytest.raises(AssertionError, match="Not a valid method!"):
+    with pytest.raises(AssertionError,
+                       match="Not a valid method, can only"
+                             " use method = remove, mean,"
+                             " median, or mode!"):
         pyedahelper.fast_missing_impute(df=test_data, method="avg",
                                         cols=["a", "b"])
 
