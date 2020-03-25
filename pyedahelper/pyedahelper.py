@@ -24,13 +24,15 @@ def fast_outlier_id(data, cols="All", method="z-score",
       The method to be applied to the data in search for outliers.
     cols: list
       The column names to be analyzed.
-    threshold_low_freq: double
-      threshold indicating value at which a frequency is considered to be an
+    threshold_low_freq: flt
+      Threshold indicating value at which a frequency is considered to be an
       outlier for categorical values.
+
     Returns
     -------
     dataframe
-        a dataframe containing a summary of outliers found.
+        A dataframe containing a summary of outliers found.
+
     Examples
     ------------------------
     >>> sample = {"col_a": [50, 50, 6, 8, float("nan")],
@@ -39,6 +41,7 @@ def fast_outlier_id(data, cols="All", method="z-score",
     >>>            }
     >>> sample_data = pd.DataFrame(sample)
     >>> fast_outlier_id(sample_data)
+
     """
 
     # ASSERT TESTS
@@ -126,7 +129,8 @@ def fast_plot(df, x, y, plot_type):
     The plot types are restricted to either line plot, scatter plot or bar
     chart. The function includes error handling to stop plots from being
     created for inappropriate column types, such as a scatter plot will not be
-    appropriate if both columns have categorical types.
+    appropriate if both columns have categorical types. The plot only runs
+    in Jupyter Lab/ Notebook.
 
     Parameters
     ----------
@@ -253,16 +257,16 @@ def fast_corr(df, col_name):
     creates correlation matrix.The correlation matrix can only include numeric
     columns.
 
-    Arguments
+    Parameters
     -----------------------
-    df: dataframe
-        the input data frame
+    df: pandas.core.frame.DataFrame
+      The input data frame
     col_name: list
-        the names of the columns selected for correlation analysis
+      The names of the columns selected for correlation analysis
 
     Returns
     ------------------------
-    plot
+    matplotlib.axes._subplots.AxesSubplot
         A matplotlib plot object
 
     Examples

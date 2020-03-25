@@ -14,7 +14,7 @@ A Python package that simplifies up the main EDA procedures such as: outlier ide
 
 ### Project Overview
 
-Data understanding and cleaning represent 60% of a data scientist's time in any given project [source](https://www.forbes.com/sites/gilpress/2016/03/23/data-preparation-most-time-consuming-least-enjoyable-data-science-task-survey-says/#2f51af916f63). 
+Data understanding and cleaning represent 60% of a data scientist's time in any given project [(source)](https://www.forbes.com/sites/gilpress/2016/03/23/data-preparation-most-time-consuming-least-enjoyable-data-science-task-survey-says/#2f51af916f63). 
 The goal with this package is to simplify this process, and allow for more efficient use of time while working on some of the main procedures done in an exploratory data analysis (EDA) (outlier identification, data visualization, correlation, missing data imputation).  
 
 
